@@ -23,6 +23,7 @@ class CleanUpExecutor (
     override fun execute(externalTask: ExternalTask?, externalTaskService: ExternalTaskService?) {
         deleteFileSystemFolder(externalTask!!.businessKey)
         updateCurrentAnalysis(externalTask.businessKey)
+        externalTaskService!!.complete(externalTask)
     }
 
     private fun deleteFileSystemFolder(businessKey: String) {
