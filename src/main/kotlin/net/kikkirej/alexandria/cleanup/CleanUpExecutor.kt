@@ -9,6 +9,7 @@ import org.camunda.bpm.client.task.ExternalTaskHandler
 import org.camunda.bpm.client.task.ExternalTaskService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import org.springframework.util.FileSystemUtils
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
@@ -28,7 +29,7 @@ class CleanUpExecutor (
 
     private fun deleteFileSystemFolder(businessKey: String) {
         val path = Path.of(File(generalProperties.sharedfolder).absolutePath + File.separator + businessKey)
-        Files.deleteIfExists(path)
+        FileSystemUtils.deleteRecursively(path)
     }
 
     private fun updateCurrentAnalysis(businessKey: String) {
